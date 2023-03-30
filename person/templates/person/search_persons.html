@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Поиск{% endblock %}
+
+{% block content %}
+    <div class="container  mt-5">
+        <div class="row">
+            <form action="{% url 'search_results' %}" target="_blank" method="get">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Фамилия:</span>
+                            <input type="text" class="form-control" placeholder="(рус)" aria-label="Редактировать"
+                                   name="lastname_c">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Имя:</span>
+                            <input type="text" class="form-control" placeholder="(рус)" aria-label="Редактировать"
+                                   name="firstname_c">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Отчество:</span>
+                            <input type="text" class="form-control" placeholder="(рус)"
+                                   aria-label="Редактировать"
+                                   name="patronymic_c">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Фамилия:</span>
+                            <input type="text" class="form-control" placeholder="(лат)" aria-label="Редактировать"
+                                   name="lastname_l">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <span class="input-group-text">Имя:</span>
+                            <input type="text" class="form-control" placeholder="(лат)" aria-label="Редактировать"
+                                   name="firstname_l">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Отчество:</span>
+                            <input type="text" class="form-control" placeholder="(лат)" aria-label="Редактировать"
+                                   name="patronymic_l">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Д/р:</span>
+                            <input type="text" class="form-control" placeholder="дд" aria-label="День рождения"
+                                   name="day">
+                            <span class="input-group-text">.</span>
+                            <input type="text" class="form-control" placeholder="мм" aria-label="Месяц рождения"
+                                   name="month">
+                            <span class="input-group-text">.</span>
+                            <input type="text" class="form-control" placeholder="гггг" aria-label="Год рождения"
+                                   name="year">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Личный номер:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Личный номер"
+                                   name="id_num">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Пол:</span>
+                            <select class="form-select" id="inputGroupSelect02" name="gender">
+                                <option selected></option>
+                                <option value="M">Мужской</option>
+                                <option value="F">Женский</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row"><h5>Документ, удостоверяющий личность:</h5></div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Тип:</span>
+                            <select class="form-select" id="inputGroupSelect02" name="id_type">
+                                <option selected></option>
+                                <option value="P">Паспорт</option>
+                                <option value="R">ВНЖ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Номер:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Номер документа"
+                                   name="pass_num">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Дата:</span>
+                            <input type="text" class="form-control" placeholder="дд" aria-label="День выдачи"
+                                   name="pass_day">
+                            <span class="input-group-text">.</span>
+                            <input type="text" class="form-control" placeholder="мм" aria-label="Месяц выдачи"
+                                   name="pass_month">
+                            <span class="input-group-text">.</span>
+                            <input type="text" class="form-control" placeholder="гггг" aria-label="Год выдачи"
+                                   name="pass_year">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row"><h5>Адрес регистрации:</h5></div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Субъект РФ:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Субъект РФ"
+                                   name="sf">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Область:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Область"
+                                   name="region">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Район:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Район"
+                                   name="district">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Город:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Город"
+                                   name="city">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Малый н/п:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Малый нп"
+                                   name="locality">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Улица:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Улица"
+                                   name="street">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Дом:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Дом"
+                                   name="house">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Корпус:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Корпус"
+                                   name="body">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Квартира:</span>
+                            <input type="text" class="form-control w-25p" placeholder=""
+                                   aria-label="Квартира"
+                                   name="flat">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="d-flex justify-content-between">
+                    <button type="reset" class="btn btn-outline-danger">Сброс</button>
+                    <button type="submit" class="btn btn-outline-dark ">Поиск</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+

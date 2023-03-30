@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Документ
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h4 class="text-center">Документ, удостоверяющий личность гражданина</h4>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row"><h6 class="text-muted text-center">Тип документа</h6></div>
+                <div class="row">
+                    {% if document.idType == 'P' %}
+                        <h5 class="text-center">Паспорт</h5>
+                    {% else %}
+                        <h5 class="text-center">Вид на жительство</h5>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="row"><h6 class="text-muted text-center">Номер документа:</h6></div>
+                <div class="row"><h5 class="text-center">{{ document.passport_num }}</h5></div>
+            </div>
+            <div class="col">
+                <div class="row"><h6 class="text-muted text-center">Дата выдачи:</h6></div>
+                <div class="row"><h5 class="text-center">{{ document.dateOfIssue }}</h5></div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row"><h6 class="text-muted">Идентификационный номер лица:</h6></div>
+                <div class="row"><h5>
+                    <a href="{% url 'person_url' document.person.slug %}" class="text-decoration-none">{{ document.person.id }}</a>
+                </h5></div>
+            </div>
+            <div class="col">
+                <div class="row"><h6 class="text-muted">Фамилия, имя, отчество:</h6></div>
+                <div class="row">
+                    <h5><a href="{% url 'person_url' document.person.slug %}" class="text-decoration-none">
+                        {{ document.person.lastnameCyrillic|default_if_none:'' }} {{ document.person.firstnameCyrillic|default_if_none:'' }} {{ document.person.patronymicCyrillic|default_if_none:'' }}
+                    </a></h5>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row"><h6 class="text-muted">Орган, выдавший документ:</h6></div>
+        <div class="row">
+            {% if document.authority == "MIA" %}
+                <h5>Министерство внутренних дел России</h5>
+            {% else %}
+                <h5>Министерство иностранных дел России</h5>
+            {% endif %}
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row"><h6 class="text-muted"> Дата внесения записи в систему:</h6></div>
+                <div class="row"><h5>{{ document.time_create }}</h5></div>
+            </div>
+            <div class="col">
+                <div class="row"><h6 class="text-muted"> Дата изменения записи:</h6></div>
+                <div class="row"><h5>{{ document.time_update }}</h5></div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col "><h6 class="text-muted align-middle">Фотография из документа:</h6></div>
+            <div class="col">
+                <img src="{{ document.photo.url }}" alt="">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

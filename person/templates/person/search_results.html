@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Результат запроса
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+    {% for object in object_list %}
+        <div class="row">
+        <div class="col">
+            <div class="row">
+                <h5><a class="text-decoration-none" href="{% url 'person_url' object.slug %} ">{{ object.lastnameCyrillic }} {{ object.firstnameCyrillic }} {{ object.patronymicCyrillic }}</a></h5>
+            </div>
+            <div class="row">
+                <h6>{{ object.birthDate }}р. </h6>
+            </div>
+            <div class="row"><h6 class="text-muted">id:{{ object.id }}</h6></div>
+        </div>
+        <div class="col">
+            <div class="row"><h6 class="text-muted">Место рождения:</h6>
+                <h6>{{ object.countryOfBirth|default_if_none:'' }} {{ object.sfOfBirth|default_if_none:'' }}
+                    {{ object.regOfBirth|default_if_none:'' }} {{ object.districtOfBirth|default_if_none:'' }}
+                    {{ object.cityOfBirth|default_if_none:'' }} {{ object.localityOfBirth|default_if_none:'' }}
+                </h6>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row"><h6 class="text-muted text-start">Последний адрес:</h6>
+                <h6>
+                    {{ object.residence_set.last.sf|default_if_none:'' }} {{ object.residence_set.last.region|default_if_none:'' }} {{ object.residence_set.last.district|default_if_none:'' }}
+                    {{ object.residence_set.last.city|default_if_none:'' }} {{ object.residence_set.last.locality|default_if_none:'' }} {{ object.residence_set.last.street|default_if_none:'' }}
+                    {{ object.residence_set.last.house|default_if_none:'' }} {{ object.residence_set.last.body|default_if_none:'' }} {{ object.residence_set.last.flat|default_if_none:'' }}
+                </h6>
+            </div>
+
+        </div>
+        <hr>
+    {% endfor %}
+
+
+</div>
+{% endblock %}
+
+

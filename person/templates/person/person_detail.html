@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Лицо
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-xl-3 col-sm-12 col-md-4 col-xs-12">
+                <img src="{{ person.passports_set.last.photo.url }}" class="rounded" alt="" width="231" height="298">
+            </div>
+            <div class="col">
+                <div class="container pt-1">
+                    <div class="row">
+                        <h4 class="text-center ">
+                            <b>{{ person.lastnameCyrillic }} {{ person.firstnameCyrillic }} {{ person.patronymicCyrillic|default_if_none:'' }}</b>
+                        </h4>
+                        <h5 class="text-center">
+                            <b>{{ person.lastnameLatin.title }} {{ person.firstnameLatin.title }} {{ person.patronymicLatin|default_if_none:'' }}</b>
+                        </h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="container pt-1">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row"><h6 class=" text-muted"> Дата рождения:</h6></div>
+                            <div class="row"><h5 class="text-left"> {{ person.birthDate }}</h5></div>
+                        </div>
+                        <div class="col">
+                            <div class="row"><h6 class=" text-muted"> Пол:</h6></div>
+                            <div class="row">
+                                {% if person.gender == 'F' %}
+                                    <h5>Жен</h5>
+                                {% else %}
+                                    <h5>Муж</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row"><h6 class=" text-muted">Идентификационный номер:</h6></div>
+                            <div class="row"><h5 class="text-left"> {{ person.id }}</h5></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <hr>
+                    <div class="row">
+                        <h6 class=" text-muted"> Место рождения: </h6>
+                        <h5 class="text-left">
+                            {{ person.countryOfBirth|default_if_none:'' }} {{ person.sfOfBirth|default_if_none:'' }} {{ person.regOfBirth|default_if_none:'' }}
+                            {{ person.districtOfBirth|default_if_none:'' }} {{ person.cityOfBirth|default_if_none:'' }} {{ person.localityOfBirth|default_if_none:'' }}
+                        </h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <h6 class="text-muted">Документы, удостоверяющие личность:</h6>
+                        {% for passport in person.passports_set.all %}
+                            <div class="row">
+                                <div class="col-xl-3 col-md-4 col-xs-12"><h5><a
+                                        href=" {% url 'document_url' passport.slug %} "
+                                        class="text-decoration-none">{{ passport.dateOfIssue }}</a>
+                                </h5></div>
+                                <div class="col">
+                                    {% if passport.idType == 'P' %}
+                                        <h5>паспорт № {{ passport.passport_num }} выдан
+                                            {% if passport.authority == 'MIA' %}
+                                                МВД
+                                            {% else %}
+                                                МИД
+                                            {% endif %} </h5>
+                                    {% else %}
+                                        <h5>вид на жительство № {{ passport.passport_num }} выдан
+                                            {% if passport.authority == 'MIA' %}
+                                                МВД
+                                            {% else %}
+                                                МИД
+                                            {% endif %} </h5>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-1">
+            <div class="row  mt-20">
+                <div class="col"><h6 class="text-muted">Адреса регистрации:</h6></div>
+                {% for residence in person.residence_set.all %}
+                    <div class="row">
+                        <div class="col-xl-3 col-md-4 col-xs-12"><h5><a href="{% url 'residence_url' residence.slug %}"
+                                                                        class="text-decoration-none">{{ residence.date }}</a>
+                        </h5></div>
+                        <div class="col">
+                            <h5>
+                                {{ residence.sf|default_if_none:'' }} {{ residence.region|default_if_none:'' }} {{ residence.district|default_if_none:'' }}
+                                {{ residence.city|default_if_none:''|default_if_none:'' }} {{ residence.locality |default_if_none:'' }} {{ residence.street|default_if_none:'' }}
+                                {{ residence.house|default_if_none:'' }} {{ residence.body|default_if_none:'' }} {{ residence.flat|default_if_none:'' }}
+                            </h5>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock %}
+
+
